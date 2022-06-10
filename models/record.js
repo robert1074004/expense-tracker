@@ -1,17 +1,17 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const recordSchema = newSchema({
+const recordSchema = new Schema({
     name: {
         type:String,
-        required
+        required:true
     },
     date: {
         type:String,
-        required
+        required:true
     },
     amount: {
         type:Number,
-        required
+        required:true
     },
 })
 
