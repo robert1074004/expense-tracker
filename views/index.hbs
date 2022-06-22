@@ -3,7 +3,7 @@
     {{#each records}}
     <li>
         {{this.name}} | {{this.date}} | {{this.amount}} | 
-         <i class = "{{this.categoryFontawesome}}"></i>  
+         <i class = "{{this.categoryFontawesome}}"></i> | <a href="/records/{{this._id}}">detail</a> 
     </li>
     {{/each}}
 </ul>

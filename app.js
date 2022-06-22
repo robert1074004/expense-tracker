@@ -61,6 +61,14 @@ app.post('/records',(req,res) => {
         .catch(error => console.log(error))
 })
 
+app.get('/records/:id',(req,res) => {
+  const id = req.params.id
+  Record.findById(id)
+        .lean()
+        .then(record => res.render('detail',{record}))
+        .catch(err => console.log(err))
+})
+
 app.listen(3000, () => {
   console.log('App is running on http://localhost:3000')
 })
