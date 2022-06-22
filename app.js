@@ -13,7 +13,6 @@ const Record = require('./models/record')
 const Category = require('./models/category')
 const category = require('./models/category')
 const app = express()
-let categorys = []
 require('dotenv').config()
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true ,useCreateIndex: true}) 
 
@@ -38,14 +37,7 @@ app.get('/', (req, res) => {
   Record.find()
         .lean()
         .then(records => {
-          records.forEach(record => {
-            Category.findById(record.categoryId)
-                    .lean()
-                    .then(category => {
-                      record['categorys'] = category.name
-                    })
-          })
-          res.render('index',{records})
+            res.render('index',{records})
         })
         .catch(error => console.error(error))
   
