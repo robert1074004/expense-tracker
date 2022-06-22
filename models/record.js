@@ -18,6 +18,12 @@ const recordSchema = new Schema({
         ref:'Category',
         index: true,
         required: true
+    },
+    categoryName: {
+        type: String,
+        ref:'Category',
+        index: true,
+        required: true
     }
 })
 

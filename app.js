@@ -56,9 +56,14 @@ app.get('/records/new',(req,res) => {
 
 app.post('/records',(req,res) => {
   const {name,date,category,amount} = req.body
-  Record.create({name,date,categoryFontawesome:category,amount})
-        .then(res.redirect('/'))
-        .catch(error => console.log(error))
+  Category.findOne({name:category})
+          .lean()
+          .then(category => {
+            Record.create({name,date,categoryFontawesome:category.fontawesome,categoryName:category.name,amount})
+              .then(() => res.redirect('/'))
+              .catch(error => console.log(error))
+          })
+          .catch(err => console.log(err))
 })
 
 app.get('/records/:id',(req,res) => {
@@ -67,6 +72,37 @@ app.get('/records/:id',(req,res) => {
         .lean()
         .then(record => res.render('detail',{record}))
         .catch(err => console.log(err))
+})
+
+app.get('/records/:id/edit',(req,res) => {
+  const id = req.params.id
+  Record.findById(id)
+        .lean()
+        .then(record =>
+          Category.find()
+                  .lean()
+                  .then(categorys => res.render('edit',{record,categorys})
+          ))
+        .catch(err => console.log(err))
+})
+
+app.post('/records/:id/edit',(req,res) => {
+  const id = req.params.id
+  const {name,date,category,amount} = req.body
+  Category.findOne({name:category})
+          .lean()
+          .then(category => {
+           return Record.findById(id)
+                    .then(record => {
+                      record = Object.assign(record, req.body)
+                      record.categoryName = category.name
+                      record.categoryFontawesome = category.fontawesome
+                      return record.save()  
+                    })
+                    .then(() => res.redirect(`/records/${id}`))
+                    .catch(error => console.log(error))
+          })
+          .catch(err => console.log(err))
 })
 
 app.listen(3000, () => {
