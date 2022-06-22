@@ -11,7 +11,7 @@ const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 const Record = require('./models/record')
 const Category = require('./models/category')
-const category = require('./models/category')
+const bodyParser = require('body-parser')
 const app = express()
 require('dotenv').config()
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true ,useCreateIndex: true}) 
@@ -32,6 +32,8 @@ app.set('view engine','hbs')
 
 app.use(express.static('public'))
 
+app.use(bodyParser.urlencoded({extended:true}))
+
 app.get('/', (req, res) => {
   
   Record.find()
@@ -43,8 +45,21 @@ app.get('/', (req, res) => {
   
 })
 
+app.get('/records/new',(req,res) => {
+  Category.find()
+        .lean()
+        .then(categorys => {
+            res.render('new',{categorys})
+        })
+        .catch(error => console.error(error))
+})
 
-
+app.post('/records',(req,res) => {
+  const {name,date,category,amount} = req.body
+  Record.create({name,date,categoryFontawesome:category,amount})
+        .then(res.redirect('/'))
+        .catch(error => console.log(error))
+})
 
 app.listen(3000, () => {
   console.log('App is running on http://localhost:3000')

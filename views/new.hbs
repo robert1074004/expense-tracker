@@ -1,0 +1,15 @@
+<form action="/records" method="POST">
+  <label for="name">name : </label>
+  <input type="text" placeholder="name" name="name" id="name">
+  <label for="date">date : </label>
+  <input type="date" name="date" id="date">
+  <label for="category">category : </label>
+  <select name="category" id="category">
+    {{#each categorys}}
+    <option value="{{this.fontawesome}}">{{this.name}}</option>
+    {{/each}}
+  </select>
+  <label for="amount">amount : </label>
+  <input type="number"  name="amount" id="amount" min="0">
+  <button type="submit">Create</button>
+</form>
