@@ -1,2 +1,5 @@
 <p>{{ record.name }} | {{record.date}} | {{record.amount}} | <i class="{{record.categoryFontawesome}}"></i></p>
-<a href="/">back</a>
+<a href="/">back</a>  
+<form action="/records/{{record._id}}/delete" style="display:inline-block;">
+<button type="submit">delete</button>
+</form>

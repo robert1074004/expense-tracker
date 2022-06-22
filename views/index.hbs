@@ -3,7 +3,9 @@
     {{#each records}}
     <li>
         {{this.name}} | {{this.date}} | {{this.amount}} | 
-         <i class = "{{this.categoryFontawesome}}"></i> | <a href="/records/{{this._id}}">detail</a> <a href="/records/{{this._id}}/edit">edit</a>
+         <i class = "{{this.categoryFontawesome}}"></i> | <a href="/records/{{this._id}}">detail</a> <a href="/records/{{this._id}}/edit">edit</a> <form action="/records/{{this._id}}/delete" style="display:inline-block;">
+         <button type="submit">delete</button>
+         </form>
     </li>
     {{/each}}
 </ul>

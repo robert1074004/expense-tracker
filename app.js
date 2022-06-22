@@ -92,7 +92,7 @@ app.post('/records/:id/edit',(req,res) => {
   Category.findOne({name:category})
           .lean()
           .then(category => {
-           return Record.findById(id)
+           Record.findById(id)
                     .then(record => {
                       record = Object.assign(record, req.body)
                       record.categoryName = category.name
@@ -103,6 +103,14 @@ app.post('/records/:id/edit',(req,res) => {
                     .catch(error => console.log(error))
           })
           .catch(err => console.log(err))
+})
+
+app.get('/records/:id/delete',(req,res) => {
+  const id = req.params.id
+   Record.findById(id)
+            .then(record => record.remove())
+            .then(() => res.redirect('/'))
+            .catch(err => console.log(err))
 })
 
 app.listen(3000, () => {
