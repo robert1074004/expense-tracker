@@ -35,15 +35,19 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({extended:true}))
 
 app.get('/', (req, res) => {
-  
   Record.find()
         .lean()
         .then(records => {
-            res.render('index',{records})
+            let totalamount = 0
+            records.forEach(record => {
+              totalamount += record.amount
+            })
+            res.render('index',{records,totalamount})
         })
-        .catch(error => console.error(error))
-  
+        .catch(error => console.error(error)) 
 })
+
+
 
 app.get('/records/new',(req,res) => {
   Category.find()
@@ -66,13 +70,7 @@ app.post('/records',(req,res) => {
           .catch(err => console.log(err))
 })
 
-app.get('/records/:id',(req,res) => {
-  const id = req.params.id
-  Record.findById(id)
-        .lean()
-        .then(record => res.render('detail',{record}))
-        .catch(err => console.log(err))
-})
+
 
 app.get('/records/:id/edit',(req,res) => {
   const id = req.params.id
@@ -99,7 +97,7 @@ app.post('/records/:id/edit',(req,res) => {
                       record.categoryFontawesome = category.fontawesome
                       return record.save()  
                     })
-                    .then(() => res.redirect(`/records/${id}`))
+                    .then(() => res.redirect(`/`))
                     .catch(error => console.log(error))
           })
           .catch(err => console.log(err))
