@@ -8,7 +8,7 @@ db.on('error',() => {
 })
 db.once('open',() => {
     console.log('mongodb connected!')
-    for (let i = 0 ; i < 10; i++) {
-        Record.create({name:'晚餐',date:'2022/6/10',amount:(i+1)*10,categoryFontawesome:'fa-solid fa-utensils',categoryName:'晚餐'})
+    for (let i = 0 ; i < 5; i++) {
+        Record.create({name:'晚餐',date:'2022-06-10',amount:(i+1)*10,categoryFontawesome:'fa-solid fa-utensils',categoryName:'餐飲食品'})
     }
 })

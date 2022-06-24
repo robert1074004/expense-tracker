@@ -47,15 +47,27 @@ app.get('/', (req, res) => {
         .catch(error => console.error(error)) 
 })
 
-
+app.get('/records/category/:categoryName', (req, res) => {
+  const categoryName = req.params.categoryName
+  Record.find({categoryName})
+        .lean()
+        .then(records => {
+            let totalamount = 0
+            records.forEach(record => {
+              totalamount += record.amount
+            })
+            res.render('index',{records,totalamount})
+        })
+        .catch(error => console.error(error)) 
+})
 
 app.get('/records/new',(req,res) => {
   Category.find()
-        .lean()
-        .then(categorys => {
-            res.render('new',{categorys})
-        })
-        .catch(error => console.error(error))
+          .lean()
+          .then(categorys => {
+                res.render('new',{categorys})
+            })
+          .catch(error => console.error(error))
 })
 
 app.post('/records',(req,res) => {
