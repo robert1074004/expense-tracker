@@ -23,9 +23,16 @@
                 </div>
             <h4 class="mb-0 me-5">{{this.amount}}</h4>
             </div>
+            <form class="mb-0 me-2" action="/records/{{this._id}}/edit" >
+                <button type="submit" class="btn btn-secondary btn-sm">修改</button>
+            </form>
+            <form class="mb-0 me-2" action="/records/{{this._id}}?_method=DELETE" method="POST">
+                <button type="submit" class="btn btn-secondary btn-sm">刪除</button>
+            </form>
             <div id="right">
-                <a class="btn btn btn-secondary btn-sm" href="/records/{{this._id}}/edit" style="display:inline;">修改</a>
-                <a class="btn btn btn-secondary btn-sm" href="/records/{{this._id}}/delete"style="display:inline;">刪除</a>
+                
+                {{!-- <a class="btn btn btn-secondary btn-sm" href="/records/{{this._id}}?_method=PUT" style="display:inline;">修改</a>
+                <a class="btn btn btn-secondary btn-sm" href="/records/{{this._id}}/??_method=DELETE"style="display:inline;">刪除</a> --}}
             </div>
         </div>
         {{/each}}

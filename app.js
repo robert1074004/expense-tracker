@@ -12,6 +12,7 @@ const exphbs = require('express-handlebars')
 const Record = require('./models/record')
 const Category = require('./models/category')
 const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 const app = express()
 require('dotenv').config()
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true ,useCreateIndex: true}) 
@@ -31,6 +32,8 @@ app.engine('hbs',exphbs({defaultLayout:'main',extname:'.hbs'}))
 app.set('view engine','hbs')
 
 app.use(express.static('public'))
+
+app.use(methodOverride('_method'))
 
 app.use(bodyParser.urlencoded({extended:true}))
 
@@ -96,7 +99,7 @@ app.get('/records/:id/edit',(req,res) => {
         .catch(err => console.log(err))
 })
 
-app.post('/records/:id/edit',(req,res) => {
+app.put('/records/:id',(req,res) => {
   const id = req.params.id
   const {name,date,category,amount} = req.body
   Category.findOne({name:category})
@@ -115,7 +118,7 @@ app.post('/records/:id/edit',(req,res) => {
           .catch(err => console.log(err))
 })
 
-app.get('/records/:id/delete',(req,res) => {
+app.delete('/records/:id',(req,res) => {
   const id = req.params.id
    Record.findById(id)
             .then(record => record.remove())
