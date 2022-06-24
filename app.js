@@ -48,7 +48,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/records/category/:categoryName', (req, res) => {
-  const categoryName = req.params.categoryName
+  const categoryName = req.params.categoryName 
   Record.find({categoryName})
         .lean()
         .then(records => {
