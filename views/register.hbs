@@ -1,1 +1,26 @@
-<h1>register</h1>
+<div class="container-fluid mt-5">
+    <div class="container mx-auto list-group-item-warning py-2 border border-dark border-3" style="width:400px;">
+      <small>*必填欄位</small>
+      <h1 class="text-center">Register</h1>
+      <form action="/users/register" method="POST" >
+        <div class="mb-3">
+          <label for="InputName" class="form-label">Email*</label>
+          <input type="text" class="form-control" id="InputName" placeholder="name" name="name" required>
+        </div>
+        <div class="mb-3">
+          <label for="InputEmail" class="form-label">Email*</label>
+          <input type="text" class="form-control" id="InputEmail" placeholder="email" name="Email" required>
+        </div>
+        <div class="mb-3">
+          <label for="InputPassword" class="form-label">Password*</label>
+          <input type="password" class="form-control" id="InputPassword" name="Password" placeholder="password"  required>
+        </div>
+        <div class="mb-3">
+          <label for="InputconfirmPassword" class="form-label">confirmPassword*</label>
+          <input type="password" class="form-control" id="InputconfirmPassword" name="confirmPassword" placeholder="confirmPassword"  required>
+        </div>
+        <div class="d-flex justify-content-center "><button type="submit" class="btn btn-secondary">Register</button></div>
+      </form>
+      <div class="d-flex  align-items-center"><p class="lead me-3 mb-0">Have An Account?</p><a href="/users/login">Login</a></div> 
+    </div>
+</div>
