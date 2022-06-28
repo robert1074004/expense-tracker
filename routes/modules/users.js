@@ -5,13 +5,18 @@ const router = express.Router()
 
 router.get('/login',(req,res) => {
     res.render('login')
+    let empty = []
+    req.session.messages = empty
 })
 
-router.post('/login',passport.authenticate('local',{
-    successRedirect:'/',
-    failureRedirect:'/users/login'})
+router.post('/login',
+    passport.authenticate('local', {
+      successRedirect: '/',
+      failureRedirect: '/login',
+      failureMessage:true
+    })
     
-)
+  )
 
 router.get('/register',(req,res) => {
     res.render('register')
