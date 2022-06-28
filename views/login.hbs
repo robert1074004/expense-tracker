@@ -2,6 +2,7 @@
     <div class="container mx-auto list-group-item-warning py-2 border border-dark border-3" style="width:400px;">
       <small>* 必填欄位</small>
       <h1 class="text-center">Login</h1>
+      {{> message}}
       <form action="/users/login" method="POST" >
         <div class="mb-3">
           <label for="InputEmail" class="form-label">Email *</label>
