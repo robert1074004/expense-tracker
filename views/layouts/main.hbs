@@ -9,11 +9,15 @@
 <body style="background-color:FFF345;">
   <nav class="navbar navbar-expand-lg " style="background-color: #e3f2fd;">
   <div class="container-fluid ">
-    <a class="navbar-brand" href="/">家庭記帳本</a>
+    <a class="navbar-brand" href="/">{{#if isAuthenticated}}{{user.name}}的{{/if}}家庭記帳本</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="nav-link" href="/users/logout" >登出</a>
+    {{#if isAuthenticated}}
+    <a class="nav-link btn btn-outline-danger" href="/users/logout" >登出</a>
+    {{else}}
+    <a class="nav-link btn btn-outline-success" href="/users/login" >登入</a>
+    {{/if}}
   </div>
 </nav>
   {{{ body }}}
