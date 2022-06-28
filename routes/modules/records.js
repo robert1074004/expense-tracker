@@ -4,8 +4,9 @@ const Record = require('../../models/record')
 const Category = require('../../models/category')
 
 router.get('/category/:categoryName', (req, res) => {
+    const userId = req.user._id
     const categoryName = req.params.categoryName 
-    Record.find({categoryName})
+    Record.find({categoryName,userId})
           .lean()
           .then(records => {
               let totalamount = 0
@@ -27,11 +28,12 @@ router.get('/category/:categoryName', (req, res) => {
   })
   
   router.post('/',(req,res) => {
+    const userId = req.user._id
     const {name,date,category,amount} = req.body
     Category.findOne({name:category})
             .lean()
             .then(category => {
-              Record.create({name,date,categoryFontawesome:category.fontawesome,categoryName:category.name,amount})
+              Record.create({name,date,categoryFontawesome:category.fontawesome,categoryName:category.name,amount,userId})
                 .then(() => res.redirect('/'))
                 .catch(error => console.log(error))
             })
