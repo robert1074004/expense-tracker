@@ -7,11 +7,11 @@ router.get('/', (req, res) => {
     Record.find({userId})
           .lean()
           .then(records => {
-              let totalamount = 0
+              let totalAmount = 0
               records.forEach(record => {
-                totalamount += record.amount
+                totalAmount += record.amount
               })
-              res.render('index',{records,totalamount})
+              res.render('index',{records,totalAmount})
           })
           .catch(error => console.error(error)) 
   })
