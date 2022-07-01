@@ -18,7 +18,7 @@
     git clone https://github.com/robert1074004/expense-tracker
  2.開啟終端機(Terminal)，進入存放此專案的資料夾
  
-    cd restaurant
+    cd expense-tracker
  3.安裝 nodemon
  
     npm install -g nodemon
